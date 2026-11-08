@@ -1,0 +1,32 @@
+{
+  "name": "opengym-backend",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/server.js",
+  "license": "AGPL-3.0-or-later",
+  "engines": {
+    "node": ">=22.9"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --env-file-if-exists=../.env --watch src/server.js",
+    "migrate": "node --env-file-if-exists=../.env src/migrate.js",
+    "sync-data": "node scripts/sync-data.mjs",
+    "vapid": "node scripts/vapid.mjs",
+    "test": "vitest run test/logic && node --test test/*.test.js"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.5.15",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.3",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.23.1",
+    "web-push": "^4.0.0"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.12"
+  }
+}

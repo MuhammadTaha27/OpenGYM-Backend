@@ -1,0 +1,25 @@
+# Render Blueprint — the openGym API on a free web service, data in Neon Postgres.
+# Values marked `sync: false` are asked for when the Blueprint is created.
+services:
+  - type: web
+    name: opengym-api
+    runtime: node
+    plan: free
+    buildCommand: npm ci --omit=dev
+    startCommand: node src/server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "22"
+      - key: DATABASE_URL          # Neon connection string (postgresql://…?sslmode=require)
+        sync: false
+      - key: JWT_SECRET            # signs sessions; generated once by Render
+        generateValue: true
+      - key: CORS_ORIGINS          # the web app's URL(s), comma-separated; the Android app needs none
+        sync: false
+      - key: ADMIN_EMAILS          # your account's email — unlocks the admin dashboard
+        sync: false
+      - key: GEMINI_API_KEY        # optional: photo/description meal logging (free key)
+        sync: false
